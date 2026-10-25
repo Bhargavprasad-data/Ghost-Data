@@ -84,25 +84,20 @@
         </a>
 
         <div class="nav-divider"></div>
-        <div class="nav-section-label">Output</div>
+        <div class="nav-section-label">Deliverables</div>
 
-        <a class="nav-item" onclick="openOutputModal()" title="View output.csv">
+        <a class="nav-item" id="nav-tab-output" onclick="switchTab('tab-output')" title="Output Contract (output.csv)">
           <span class="nav-icon" style="color: var(--green);">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" x2="8" y1="13" y2="13"/>
+              <line x1="16" x2="8" y1="17" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
             </svg>
           </span>
-          <span class="nav-label">View output.csv</span>
-        </a>
-
-        <a class="nav-item" href="/api/download-output" download="output.csv" title="Download output.csv">
-          <span class="nav-icon" style="color: var(--cyan);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
-            </svg>
-          </span>
-          <span class="nav-label">Download CSV</span>
+          <span class="nav-label">Output Contract</span>
+          <span class="nav-badge" id="rail-output-badge" style="background:rgba(16,185,129,0.15);color:var(--green);border-color:rgba(16,185,129,0.3);">518</span>
         </a>
       </nav>
 
@@ -152,17 +147,6 @@
           <span class="status-dot" id="backend-status-dot"></span>
           <span id="backend-status-text">Connecting…</span>
         </div>
-
-        <!-- Output buttons -->
-        <button class="tb-btn tb-btn-ghost" id="btn-view-output" onclick="openOutputModal()" title="View output.csv">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-          <span>View output.csv</span>
-        </button>
-
-        <a href="/api/download-output" download="output.csv" class="tb-btn tb-btn-ghost" id="btn-topbar-download">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          <span>Download</span>
-        </a>
 
         <!-- Primary action -->
         <button class="tb-btn tb-btn-primary" id="btn-topbar-run" onclick="triggerFullAudit()">
@@ -256,7 +240,7 @@
             <div class="kpi-foot">SQL · Logs · JSON · PDFs · Screenshots</div>
           </div>
 
-          <div class="kpi-card kpi-accent-green kpi-clickable" onclick="openOutputModal()" title="View output.csv">
+          <div class="kpi-card kpi-accent-green kpi-clickable" onclick="switchTab('tab-output')" title="Open Output Contract Page">
             <div class="kpi-header">
               <span class="kpi-label">Output Contract</span>
               <div class="kpi-icon" style="color:var(--green);">
@@ -264,7 +248,7 @@
               </div>
             </div>
             <div class="kpi-number" id="kpi-val-output" style="font-size:1.5rem;color:var(--green);">output.csv</div>
-            <div class="kpi-foot" id="kpi-val-output-footer">518 rows · Click to view &amp; download</div>
+            <div class="kpi-foot" id="kpi-val-output-footer">518 rows · Click to inspect</div>
           </div>
         </div>
 
@@ -478,6 +462,155 @@
         </div>
       </div>
 
+      <!-- ============================================================
+           TAB 5 — OUTPUT CONTRACT (output.csv)
+           ============================================================ -->
+      <div id="tab-output" class="tab-pane">
+        <div class="panel">
+
+          <!-- Header -->
+          <div class="panel-header" style="flex-wrap:wrap;gap:1rem;">
+            <div>
+              <h3 class="panel-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" x2="8" y1="13" y2="13"/>
+                  <line x1="16" x2="8" y1="17" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+                Output Contract — output.csv Inspection &amp; Compliance
+              </h3>
+              <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem;">
+                Official schema: <code style="color:var(--orange);">case_id,deletion_status,steps_json</code> · Exactly 518 evaluation predictions
+              </p>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:0.6rem;">
+              <button class="tb-btn tb-btn-ghost" onclick="copyRawOutput()" title="Copy raw CSV text">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect width="14" height="14" x="8" y="8" rx="2"/>
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                </svg>
+                Copy CSV
+              </button>
+              <a href="/api/download-output" download="output.csv" class="tb-btn tb-btn-primary" style="text-decoration:none;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" x2="12" y1="15" y2="3"/>
+                </svg>
+                Download output.csv
+              </a>
+            </div>
+          </div>
+
+          <!-- KPI Strip -->
+          <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 1.25rem;">
+            <div class="kpi-card kpi-accent-orange">
+              <div class="kpi-label">Total Predictions</div>
+              <div class="kpi-number" id="output-kpi-total">518</div>
+              <div class="kpi-foot"><span class="kpi-tag kpi-tag-green">100%</span> Case Coverage</div>
+            </div>
+
+            <div class="kpi-card kpi-accent-green">
+              <div class="kpi-label">Complete Cases</div>
+              <div class="kpi-number" id="output-kpi-complete" style="color:var(--green);">195</div>
+              <div class="kpi-foot">Verified Compliant Cutoff</div>
+            </div>
+
+            <div class="kpi-card kpi-accent-purple">
+              <div class="kpi-label">Incomplete Cases</div>
+              <div class="kpi-number" id="output-kpi-incomplete" style="color:var(--red);">313</div>
+              <div class="kpi-foot">Full Remediation Generated</div>
+            </div>
+
+            <div class="kpi-card kpi-accent-cyan">
+              <div class="kpi-label">Not Applicable</div>
+              <div class="kpi-number" id="output-kpi-na" style="color:var(--text-muted);">10</div>
+              <div class="kpi-foot">Unauthorized / Non-Deletion</div>
+            </div>
+          </div>
+
+          <!-- Filter & View Controls -->
+          <div class="filter-bar" style="margin-bottom:1rem;">
+            <div class="search-wrap" style="flex:1;max-width:320px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="text" id="output-search-input" class="search-field" placeholder="Search case_id in output…" oninput="handleOutputSearch()">
+            </div>
+
+            <div class="chip-row">
+              <span class="chip-label">Status</span>
+              <button class="chip active" id="output-chip-all" onclick="filterOutputByStatus('ALL')">All (518)</button>
+              <button class="chip" id="output-chip-complete" onclick="filterOutputByStatus('COMPLETE')">Complete</button>
+              <button class="chip" id="output-chip-incomplete" onclick="filterOutputByStatus('INCOMPLETE')">Incomplete</button>
+              <button class="chip" id="output-chip-na" onclick="filterOutputByStatus('NOT_APPLICABLE')">N/A</button>
+            </div>
+
+            <div style="margin-left:auto;display:flex;align-items:center;background:var(--surface-2);padding:3px;border-radius:7px;border:1px solid var(--border);gap:2px;">
+              <button class="view-toggle active" id="btn-mode-table" onclick="setOutputViewMode('table')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+                Table
+              </button>
+              <button class="view-toggle" id="btn-mode-raw" onclick="setOutputViewMode('raw')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                Raw CSV
+              </button>
+            </div>
+          </div>
+
+          <!-- Table View Container -->
+          <div id="output-view-table">
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width:60px;">#</th>
+                    <th style="width:130px;">case_id</th>
+                    <th style="width:160px;">deletion_status</th>
+                    <th style="width:110px;">Steps Count</th>
+                    <th>steps_json Snippet</th>
+                    <th style="width:90px;text-align:right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="output-table-body">
+                  <tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-muted);">Loading output data…</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Output Pagination Bar -->
+            <div class="pagination-bar" style="margin-top:1rem;">
+              <span id="output-pagination-info" class="page-info">Showing 1–25 of 518 cases</span>
+              <div class="page-controls">
+                <button class="tb-btn tb-btn-ghost" id="output-prev-page" onclick="changeOutputPage(-1)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                  Prev
+                </button>
+                <span id="output-page-label" class="page-num">1</span>
+                <button class="tb-btn tb-btn-ghost" id="output-next-page" onclick="changeOutputPage(1)">
+                  Next
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Raw CSV View Container -->
+          <div id="output-view-raw" style="display:none;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;padding:0.5rem 0.75rem;background:var(--surface-2);border-radius:6px;border:1px solid var(--border);">
+              <span style="font-size:0.77rem;color:var(--text-muted);">Schema Header: <code style="color:var(--green);font-weight:700;">case_id,deletion_status,steps_json</code></span>
+              <button class="tb-btn tb-btn-ghost" style="font-size:0.75rem;" onclick="copyRawOutput()">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Raw CSV
+              </button>
+            </div>
+            <pre class="code-pre" id="output-raw-text" style="max-height:550px;overflow-y:auto;font-size:0.74rem;">Loading CSV text…</pre>
+          </div>
+
+        </div>
+      </div>
+
     </main>
   </div>
 
@@ -576,103 +709,6 @@
   </div>
 </aside>
 
-<!-- ================================================================
-     OUTPUT.CSV LIVE VIEWER MODAL
-     ================================================================ -->
-<div class="modal-backdrop" id="output-modal-overlay" onclick="if(event.target===this)closeOutputModal()">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div style="display:flex;align-items:center;gap:0.75rem;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-        <span class="modal-title">output.csv Live Viewer</span>
-        <span class="pill pill-green" id="output-modal-status-badge">518 Cases</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:0.5rem;">
-        <a href="/api/download-output" download="output.csv" class="tb-btn tb-btn-primary" style="text-decoration:none;font-size:0.78rem;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          Download CSV
-        </a>
-        <button class="tb-btn tb-btn-ghost icon-btn" onclick="closeOutputModal()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="modal-filter-bar">
-      <div class="output-search-row">
-        <div class="search-wrap" style="flex:1;max-width:320px;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="output-search-input" class="search-field" placeholder="Search case_id…" oninput="handleOutputSearch()">
-        </div>
-        <select id="output-filter-status" class="select-field" onchange="handleOutputFilter()">
-          <option value="ALL">All Statuses</option>
-          <option value="COMPLETE">COMPLETE</option>
-          <option value="INCOMPLETE">INCOMPLETE</option>
-          <option value="NOT_APPLICABLE">NOT_APPLICABLE</option>
-        </select>
-      </div>
-
-      <div style="display:flex;align-items:center;background:var(--surface-2);padding:3px;border-radius:7px;border:1px solid var(--border);gap:2px;">
-        <button class="view-toggle active" id="btn-mode-table" onclick="setOutputViewMode('table')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-          Table
-        </button>
-        <button class="view-toggle" id="btn-mode-raw" onclick="setOutputViewMode('raw')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          Raw CSV
-        </button>
-      </div>
-    </div>
-
-    <div class="modal-body" id="output-modal-body">
-      <!-- Table mode -->
-      <div id="output-view-table">
-        <div style="max-height:460px;overflow-y:auto;border-radius:8px;border:1px solid var(--border);">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th style="width:60px;">#</th>
-                <th style="width:130px;">case_id</th>
-                <th style="width:160px;">deletion_status</th>
-                <th style="width:100px;">Steps</th>
-                <th>steps_json snippet</th>
-                <th style="width:90px;text-align:right;">Action</th>
-              </tr>
-            </thead>
-            <tbody id="output-table-body">
-              <tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-muted);">Loading output data…</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Raw mode -->
-      <div id="output-view-raw" style="display:none;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
-          <span style="font-size:0.77rem;color:var(--text-muted);">Format: <code>case_id,deletion_status,steps_json</code></span>
-          <button class="tb-btn tb-btn-ghost" style="font-size:0.75rem;" onclick="copyRawOutput()">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Copy CSV
-          </button>
-        </div>
-        <pre class="code-pre" id="output-raw-text" style="max-height:460px;overflow-y:auto;font-size:0.73rem;">Loading CSV text…</pre>
-      </div>
-    </div>
-
-    <div class="modal-foot">
-      <span id="output-pagination-info" style="font-size:0.78rem;color:var(--text-muted);">Showing 1–25 of 518 cases</span>
-      <div style="display:flex;align-items:center;gap:0.5rem;">
-        <button class="tb-btn tb-btn-ghost icon-btn" id="output-prev-page" onclick="changeOutputPage(-1)" disabled>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <span id="output-page-label" style="font-size:0.8rem;color:var(--text-muted);">Page 1 / 21</span>
-        <button class="tb-btn tb-btn-ghost icon-btn" id="output-next-page" onclick="changeOutputPage(1)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Toast shelf -->
 <div class="toast-shelf" id="toast-shelf"></div>

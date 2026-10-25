@@ -174,11 +174,18 @@ function switchTab(tabId) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   const pane = document.getElementById(tabId);
   if (pane) pane.classList.add('active');
-  const labels = { 'tab-overview': 'Overview', 'tab-cases': 'Case Explorer', 'tab-benchmark': 'Benchmark', 'tab-evidence': 'Evidence Files' };
+  const labels = {
+    'tab-overview': 'Overview',
+    'tab-cases': 'Case Explorer',
+    'tab-benchmark': 'Benchmark',
+    'tab-evidence': 'Evidence Files',
+    'tab-output': 'Output Contract'
+  };
   const bc = document.getElementById('topbar-breadcrumb');
   if (bc) bc.innerText = labels[tabId] || tabId;
   if (tabId === 'tab-cases') fetchCases();
   else if (tabId === 'tab-benchmark') fetchBenchmark();
+  else if (tabId === 'tab-output') fetchOutputRecords();
 }
 
 // Backwards compat alias
@@ -246,6 +253,8 @@ async function fetchStats() {
   document.getElementById('rail-cases-badge').innerText  = data.total_eval_cases || 518;
   document.getElementById('kpi-val-evidence').innerText  = data.evidence_files_count || 94;
   document.getElementById('rail-evidence-badge').innerText = data.evidence_files_count || 94;
+  const railOutput = document.getElementById('rail-output-badge');
+  if (railOutput) railOutput.innerText = data.total_eval_cases || 518;
 
   if (data.sample_evaluation) {
     document.getElementById('kpi-val-acc').innerText = `${data.sample_evaluation.status_accuracy}%`;
@@ -611,25 +620,27 @@ function copyEvidenceSnippet() {
   navigator.clipboard.writeText(content).then(() => showToast('Evidence content copied!', 'success'));
 }
 
-// ─── Output CSV Modal ────────────────────────────────────────────────
+// ─── Output CSV Tab Page ─────────────────────────────────────────────
 const outputState = { page: 1, pageSize: 25, search: '', status: 'ALL', viewMode: 'table', totalPages: 1, totalRows: 0, rawLoaded: false };
 
-async function openOutputModal() {
-  document.getElementById('output-modal-overlay').classList.add('active');
-  outputState.page = 1;
-  await fetchOutputRecords();
+function openOutputModal() {
+  switchTab('tab-output');
 }
 
 function closeOutputModal() {
-  document.getElementById('output-modal-overlay').classList.remove('active');
+  // no-op for backward compatibility
 }
 
 function setOutputViewMode(mode) {
   outputState.viewMode = mode;
-  document.getElementById('btn-mode-table').classList.toggle('active', mode === 'table');
-  document.getElementById('btn-mode-raw').classList.toggle('active', mode === 'raw');
-  document.getElementById('output-view-table').style.display = mode === 'table' ? 'block' : 'none';
-  document.getElementById('output-view-raw').style.display   = mode === 'raw'   ? 'block' : 'none';
+  const btnTable = document.getElementById('btn-mode-table');
+  const btnRaw   = document.getElementById('btn-mode-raw');
+  if (btnTable) btnTable.classList.toggle('active', mode === 'table');
+  if (btnRaw)   btnRaw.classList.toggle('active', mode === 'raw');
+  const viewTable = document.getElementById('output-view-table');
+  const viewRaw   = document.getElementById('output-view-raw');
+  if (viewTable) viewTable.style.display = mode === 'table' ? 'block' : 'none';
+  if (viewRaw)   viewRaw.style.display   = mode === 'raw'   ? 'block' : 'none';
   if (mode === 'raw' && !outputState.rawLoaded) fetchOutputRaw();
 }
 
@@ -640,13 +651,31 @@ function handleOutputSearch() {
     outputState.search = document.getElementById('output-search-input').value.trim();
     outputState.page   = 1;
     fetchOutputRecords();
-  }, 250);
+  }, 220);
+}
+
+function filterOutputByStatus(status) {
+  outputState.status = status;
+  outputState.page   = 1;
+  document.querySelectorAll('#tab-output .chip-row .chip').forEach(c => c.classList.remove('active'));
+  const chipMap = {
+    ALL: 'output-chip-all',
+    COMPLETE: 'output-chip-complete',
+    INCOMPLETE: 'output-chip-incomplete',
+    NOT_APPLICABLE: 'output-chip-na'
+  };
+  const target = document.getElementById(chipMap[status]);
+  if (target) target.classList.add('active');
+  fetchOutputRecords();
 }
 
 function handleOutputFilter() {
-  outputState.status = document.getElementById('output-filter-status').value;
-  outputState.page   = 1;
-  fetchOutputRecords();
+  const select = document.getElementById('output-filter-status');
+  if (select) {
+    outputState.status = select.value;
+    outputState.page   = 1;
+    fetchOutputRecords();
+  }
 }
 
 async function changeOutputPage(delta) {
@@ -659,6 +688,7 @@ async function changeOutputPage(delta) {
 
 async function fetchOutputRecords() {
   const tbody = document.getElementById('output-table-body');
+  if (!tbody) return;
   try {
     const query = new URLSearchParams({ search: outputState.search, status: outputState.status, page: outputState.page, page_size: outputState.pageSize });
     const res   = await fetch(`${API_BASE}/api/output/records?${query}`);
@@ -668,13 +698,31 @@ async function fetchOutputRecords() {
     outputState.totalPages = data.total_pages || 1;
     outputState.totalRows  = data.total_rows  || 0;
 
-    document.getElementById('output-modal-status-badge').innerText = `${data.total_unfiltered || data.total_rows} Audited`;
-    document.getElementById('output-page-label').innerText         = `Page ${data.page} / ${data.total_pages}`;
+    // Update KPI counters
+    if (data.status_counts) {
+      const c = data.status_counts.COMPLETE || 195;
+      const ic = data.status_counts.INCOMPLETE || 313;
+      const na = data.status_counts.NOT_APPLICABLE || 10;
+      const elC = document.getElementById('output-kpi-complete');
+      if (elC) elC.innerText = c;
+      const elIC = document.getElementById('output-kpi-incomplete');
+      if (elIC) elIC.innerText = ic;
+      const elNA = document.getElementById('output-kpi-na');
+      if (elNA) elNA.innerText = na;
+      const elTotal = document.getElementById('output-kpi-total');
+      if (elTotal) elTotal.innerText = data.total_unfiltered || (c + ic + na);
+    }
+
+    const pageLabel = document.getElementById('output-page-label');
+    if (pageLabel) pageLabel.innerText = `Page ${data.page} / ${data.total_pages}`;
     const startNum = data.total_rows === 0 ? 0 : (data.page - 1) * data.page_size + 1;
     const endNum   = Math.min(data.page * data.page_size, data.total_rows);
-    document.getElementById('output-pagination-info').innerText    = `Showing ${startNum}–${endNum} of ${data.total_rows} cases`;
-    document.getElementById('output-prev-page').disabled = (data.page <= 1);
-    document.getElementById('output-next-page').disabled = (data.page >= data.total_pages);
+    const pagInfo = document.getElementById('output-pagination-info');
+    if (pagInfo) pagInfo.innerText = `Showing ${startNum}–${endNum} of ${data.total_rows} cases`;
+    const prevBtn = document.getElementById('output-prev-page');
+    if (prevBtn) prevBtn.disabled = (data.page <= 1);
+    const nextBtn = document.getElementById('output-next-page');
+    if (nextBtn) nextBtn.disabled = (data.page >= data.total_pages);
 
     if (!data.records?.length) {
       tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:2.5rem;color:var(--text-faint);">No cases match criteria</td></tr>`;
@@ -685,16 +733,16 @@ async function fetchOutputRecords() {
       const rowNo   = startNum + idx;
       const snippet = r.steps_raw?.length > 80 ? r.steps_raw.substring(0, 80) + '…' : (r.steps_raw || '[]');
       return `
-        <tr>
+        <tr onclick="inspectCase('${r.case_id}')">
           <td style="color:var(--text-faint);font-size:0.73rem;">${rowNo}</td>
           <td class="mono" style="font-weight:700;color:var(--orange);">${r.case_id}</td>
           <td><span class="pill ${pillCls}">${r.deletion_status}</span></td>
           <td style="font-weight:600;font-size:0.8rem;">${r.steps_count} steps</td>
           <td><code style="font-size:0.71rem;color:#38bdf8;background:rgba(56,189,248,0.07);padding:2px 5px;border-radius:4px;word-break:break-all;">${snippet}</code></td>
           <td style="text-align:right;">
-            <button class="tb-btn tb-btn-ghost" style="padding:0.28rem 0.55rem;font-size:0.72rem;" onclick="closeOutputModal();inspectCase('${r.case_id}')">
+            <button class="tb-btn tb-btn-ghost" style="padding:0.28rem 0.55rem;font-size:0.72rem;" onclick="event.stopPropagation();inspectCase('${r.case_id}')">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-              View
+              Inspect
             </button>
           </td>
         </tr>`;
@@ -706,9 +754,10 @@ async function fetchOutputRecords() {
 
 async function fetchOutputRaw() {
   const box = document.getElementById('output-raw-text');
+  if (!box) return;
   box.innerText = 'Loading raw CSV lines…';
   try {
-    const res  = await fetch(`${API_BASE}/api/output/raw?limit=200`);
+    const res  = await fetch(`${API_BASE}/api/output/raw?limit=250`);
     if (!res.ok) throw new Error('raw CSV failed');
     const data = await res.json();
     box.innerText = data.content;
@@ -718,9 +767,21 @@ async function fetchOutputRaw() {
   }
 }
 
-function copyRawOutput() {
-  const text = document.getElementById('output-raw-text').innerText;
-  navigator.clipboard.writeText(text).then(() => showToast('Raw CSV copied!', 'success'));
+async function copyRawOutput() {
+  try {
+    const res = await fetch(`${API_BASE}/api/output/raw?limit=1000`);
+    if (!res.ok) throw new Error('Failed to load CSV');
+    const data = await res.json();
+    await navigator.clipboard.writeText(data.content);
+    showToast('Full output.csv copied to clipboard!', 'success');
+  } catch {
+    const text = document.getElementById('output-raw-text')?.innerText || '';
+    if (text) {
+      navigator.clipboard.writeText(text).then(() => showToast('CSV text copied!', 'success'));
+    } else {
+      showToast('No CSV content loaded to copy', 'error');
+    }
+  }
 }
 
 // ─── Global Search ──────────────────────────────────────────────────
