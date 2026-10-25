@@ -1,0 +1,385 @@
+==================================================
+CASE: case_01 | Email: amina.elmasri@gmail.com | Status: COMPLETE (Reported: COMPLETE)
+Requested: 2026-08-18T09:14:00Z | Reported: 2026-08-20T16:42:00Z | Audit: 2026-09-03T11:30:00Z
+Request Text:
+  Hi, I haven’t used this account in years and would like it closed. Please remove the profile and the personal details attached to it.
+Steps (1):
+  [1] VERIFICATION | account_service | account_001 | VERIFY_RECORD_ABSENT | ABSENT | cite: 'evidence_54'
+==================================================
+CASE: case_02 | Email: mateo.rios@outlook.com | Status: COMPLETE (Reported: PARTIALLY_COMPLETE)
+Requested: 2026-08-21T18:06:00Z | Reported: 2026-08-22T07:25:00Z | Audit: 2026-09-04T15:00:00Z
+Request Text:
+  Intenté eliminar mi cuenta ayer, pero la página terminó mostrando un error. ¿Pueden comprobar si todavía queda algún dato y completar la eliminación si hace falta?
+Steps (1):
+  [1] VERIFICATION | account_service | account_002 | VERIFY_RECORD_ABSENT | ABSENT | cite: 'evidence_54'
+==================================================
+CASE: case_03 | Email: l.fontaine46@yahoo.com | Status: COMPLETE (Reported: COMPLETE)
+Requested: 2026-09-13T11:00:00Z | Reported: 2026-09-15T11:00:00Z | Audit: 2026-09-26T11:00:00Z
+Request Text:
+  Je demande la suppression définitive du compte associé à cette adresse e-mail. Veuillez examiner les identifiants actuels et antérieurs conformément à votre procédure de confidentialité. Merci de confirmer le résultat une fois la vérification terminée.
+Steps (3):
+  [1] VERIFICATION | account_service | account_7566 | VERIFY_RECORD_ABSENT | ABSENT | cite: 'evidence_94'
+  [2] VERIFICATION | security_service | audit_record_2016 | VERIFY_RECORD_PRESENT | PRESENT | cite: 'evidence_94'
+  [3] VERIFICATION | analytics_platform | analytics_9406 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: 'evidence_94'
+==================================================
+CASE: case_04 | Email: thandiwe.n@gmail.com | Status: COMPLETE (Reported: COMPLETE)
+Requested: 2026-08-25T12:32:00Z | Reported: 2026-08-27T08:54:00Z | Audit: 2026-09-07T10:20:00Z
+Request Text:
+  I’m deleting my account. You can keep anonymous statistics, but nothing in analytics should still point back to me.
+Steps (2):
+  [1] VERIFICATION | account_service | account_004 | VERIFY_RECORD_ABSENT | ABSENT | cite: 'evidence_54'
+  [2] VERIFICATION | analytics_platform | analytics_901 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: 'evidence_56'
+==================================================
+CASE: case_05 | Email: leila.haddad@yahoo.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-08-27T14:17:00Z | Reported: 2026-08-28T09:03:00Z | Audit: 2026-09-08T13:40:00Z
+Request Text:
+  I deleted this account and received a confirmation, but the same email address is still recognized. Please remove any remaining copy of my profile.
+Steps (3):
+  [1] FINDING | account_service | account_005 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_54'
+  [2] REMEDIATION | account_service | account_005 | DELETE_RECORD | ABSENT | cite: ''
+  [3] VERIFICATION | account_service | account_005 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+==================================================
+CASE: case_06 | Email: jonas.berg@outlook.com | Status: INCOMPLETE (Reported: PARTIALLY_COMPLETE)
+Requested: 2026-08-29T06:51:00Z | Reported: 2026-08-30T17:12:00Z | Audit: 2026-09-10T09:15:00Z
+Request Text:
+  My account page is gone, but my old profile still appears when I search for it. Can you remove that search result too?
+Steps (4):
+  [1] FINDING | search_service | search_001 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_57'
+  [2] REMEDIATION | search_service | search_001 | DELETE_RECORD | ABSENT | cite: ''
+  [3] VERIFICATION | account_service | account_006 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [4] VERIFICATION | search_service | search_001 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+==================================================
+CASE: case_07 | Email: priya.raman@gmail.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-08-31T11:26:00Z | Reported: 2026-09-01T19:30:00Z | Audit: 2026-09-12T08:00:00Z
+Request Text:
+  Please delete my account and the identity document I sent to support while resolving a delivery issue.
+Steps (4):
+  [1] FINDING | support_platform | support_001 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_58'
+  [2] REMEDIATION | support_platform | support_001 | DELETE_RECORD | ABSENT | cite: ''
+  [3] VERIFICATION | account_service | account_007 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [4] VERIFICATION | support_platform | support_001 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+==================================================
+CASE: case_08 | Email: gabriel.costa@proton.me | Status: INCOMPLETE (Reported: PARTIALLY_COMPLETE)
+Requested: 2026-08-29T20:03:00Z | Reported: 2026-08-31T13:44:00Z | Audit: 2026-09-14T16:10:00Z
+Request Text:
+  I closed my account, but an old “download your data” link still works. Please delete that export file as well.
+Steps (4):
+  [1] FINDING | export_service | export_001 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_59'
+  [2] REMEDIATION | export_service | export_001 | DELETE_RECORD | ABSENT | cite: ''
+  [3] VERIFICATION | account_service | account_008 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [4] VERIFICATION | export_service | export_001 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+==================================================
+CASE: case_09 | Email: k.appiah88@gmail.com | Status: INCOMPLETE (Reported: NOT_STARTED)
+Requested: 2026-09-05T09:00:00Z | Reported: 2026-09-07T09:00:00Z | Audit: 2026-09-16T09:00:00Z
+Request Text:
+  Please permanently delete the account associated with this email address. Please apply the correct treatment to records covered by the request. Please confirm when the review is complete.
+Steps (5):
+  [1] FINDING | backup_service | backup_4978 | REPORT_RESTORE_RISK | ACTIVE | cite: 'evidence_93'
+  [2] REMEDIATION | backup_service | backup_4978 | BLOCK_RESTORE | BLOCKED | cite: ''
+  [3] VERIFICATION | account_service | account_3960 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [4] VERIFICATION | security_service | audit_record_4902 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [5] VERIFICATION | backup_service | backup_4978 | VERIFY_RESTORE_BLOCKED | BLOCKED | cite: ''
+==================================================
+CASE: case_10 | Email: nadia.ionescu@yahoo.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-08-31T15:42:00Z | Reported: 2026-09-02T10:08:00Z | Audit: 2026-09-18T12:25:00Z
+Request Text:
+  I used this Yahoo address before changing the email on my account. Please remove records linked to both the old and current addresses.
+Steps (4):
+  [1] FINDING | support_platform | support_002 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_61'
+  [2] REMEDIATION | support_platform | support_002 | DELETE_RECORD | ABSENT | cite: ''
+  [3] VERIFICATION | account_service | account_010 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [4] VERIFICATION | support_platform | support_002 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+==================================================
+CASE: case_11 | Email: novak.tomasz@icloud.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-09-09T12:00:00Z | Reported: 2026-09-12T12:00:00Z | Audit: 2026-10-01T12:00:00Z
+Request Text:
+  I would like the account associated with this address to be erased. Please handle any copies that fall within the scope of the deletion request. Please contact me if you need information to verify the request.
+Steps (14):
+  [1] FINDING | search_service | search_052 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_03'
+  [2] FINDING | analytics_platform | analytics_2034 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_03'
+  [3] FINDING | support_platform | support_864 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_03'
+  [4] FINDING | integration_service | data_flow_9522 | REPORT_ACTIVE_DATA_FLOW | ACTIVE | cite: 'evidence_03'
+  [5] REMEDIATION | integration_service | data_flow_9522 | DISABLE_DATA_FLOW | DISABLED | cite: ''
+  [6] REMEDIATION | search_service | search_052 | DELETE_RECORD | ABSENT | cite: ''
+  [7] REMEDIATION | support_platform | support_864 | REDACT_RECORD | REDACTED | cite: ''
+  [8] REMEDIATION | analytics_platform | analytics_2034 | ANONYMIZE_RECORD | ANONYMIZED | cite: ''
+  [9] VERIFICATION | account_service | account_4248 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [10] VERIFICATION | search_service | search_052 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [11] VERIFICATION | security_service | audit_record_9394 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [12] VERIFICATION | support_platform | support_864 | VERIFY_RECORD_REDACTED | REDACTED | cite: ''
+  [13] VERIFICATION | analytics_platform | analytics_2034 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: ''
+  [14] VERIFICATION | integration_service | data_flow_9522 | VERIFY_DATA_FLOW_DISABLED | DISABLED | cite: ''
+==================================================
+CASE: case_12 | Email: minjun.kim@gmail.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-08-24T12:00:00Z | Reported: 2026-08-25T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  I changed the email on this account before deleting it. Please check that nothing tied to the old address was left behind, even in systems that do not display the email.
+Steps (5):
+  [1] FINDING | analytics_platform | analytics_9914 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_01'
+  [2] REMEDIATION | analytics_platform | analytics_9914 | DELETE_RECORD | ABSENT | cite: ''
+  [3] VERIFICATION | account_service | account_9797 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [4] VERIFICATION | analytics_platform | analytics_9914 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [5] VERIFICATION | security_service | audit_record_2945 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+==================================================
+CASE: case_13 | Email: noor-khalil@proton.me | Status: INCOMPLETE (Reported: NOT_STARTED)
+Requested: 2026-09-08T12:00:00Z | Reported: 2026-09-09T12:00:00Z | Audit: 2026-10-01T12:00:00Z
+Request Text:
+  Please close my account and process the associated personal-data deletion. Please check the records connected to the account before confirming completion. Please contact me if you need information to verify the request.
+Steps (8):
+  [1] FINDING | search_service | search_1308 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_03'
+  [2] FINDING | support_platform | support_4218 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_03'
+  [3] REMEDIATION | search_service | search_1308 | DELETE_RECORD | ABSENT | cite: ''
+  [4] REMEDIATION | support_platform | support_4218 | DELETE_RECORD | ABSENT | cite: ''
+  [5] VERIFICATION | account_service | account_9335 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [6] VERIFICATION | search_service | search_1308 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [7] VERIFICATION | support_platform | support_4218 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [8] VERIFICATION | security_service | audit_record_4816 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+==================================================
+CASE: case_14 | Email: y.tanaka32@gmail.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-09-04T12:00:00Z | Reported: 2026-09-06T12:00:00Z | Audit: 2026-10-01T12:00:00Z
+Request Text:
+  このメールアドレスに関連するアカウントの完全な削除を依頼します。 プライバシー手続きに従い、現在および過去の識別情報を確認してください。 確認が完了したら結果をお知らせください。
+Steps (5):
+  [1] FINDING | backup_service | backup_3870 | REPORT_RESTORE_RISK | ACTIVE | cite: 'evidence_03'
+  [2] REMEDIATION | backup_service | backup_3870 | BLOCK_RESTORE | BLOCKED | cite: ''
+  [3] VERIFICATION | account_service | account_3677 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [4] VERIFICATION | security_service | audit_record_987 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [5] VERIFICATION | backup_service | backup_3870 | VERIFY_RESTORE_BLOCKED | BLOCKED | cite: ''
+==================================================
+CASE: case_15 | Email: lucia-torres@gmail.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-08-21T12:00:00Z | Reported: 2026-08-22T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  I disconnected my account last week, but one of the integrations still seems active. Close the account completely and make sure it can no longer send my data to other systems.
+Steps (5):
+  [1] FINDING | integration_service | data_flow_9846 | REPORT_ACTIVE_DATA_FLOW | ACTIVE | cite: 'evidence_01'
+  [2] REMEDIATION | integration_service | data_flow_9846 | DISABLE_DATA_FLOW | DISABLED | cite: ''
+  [3] VERIFICATION | account_service | account_4745 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [4] VERIFICATION | security_service | audit_record_1596 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [5] VERIFICATION | integration_service | data_flow_9846 | VERIFY_DATA_FLOW_DISABLED | DISABLED | cite: ''
+==================================================
+CASE: case_16 | Email: diya.k4436@outlook.com | Status: INCOMPLETE (Reported: NOT_STARTED)
+Requested: 2026-08-29T10:00:00Z | Reported: 2026-09-01T10:00:00Z | Audit: 2026-09-21T10:00:00Z
+Request Text:
+  Please treat this message as a request for permanent account deletion. Please include information linked through current or earlier account identifiers. A short confirmation when the process is complete is sufficient.
+Steps (7):
+  [1] FINDING | account_service | account_994 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_05'
+  [2] FINDING | search_service | search_1007 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_05'
+  [3] REMEDIATION | account_service | account_994 | DELETE_RECORD | ABSENT | cite: ''
+  [4] REMEDIATION | search_service | search_1007 | DELETE_RECORD | ABSENT | cite: ''
+  [5] VERIFICATION | account_service | account_994 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [6] VERIFICATION | search_service | search_1007 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [7] VERIFICATION | security_service | audit_record_9528 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+==================================================
+CASE: case_17 | Email: leonie.g9352@outlook.com | Status: INCOMPLETE (Reported: NOT_STARTED)
+Requested: 2026-08-19T12:00:00Z | Reported: 2026-08-22T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  I want to close this account permanently. You may retain backups if required, but they must not be able to restore my personal profile.
+Steps (5):
+  [1] FINDING | backup_service | backup_3245 | REPORT_RESTORE_RISK | ACTIVE | cite: 'evidence_01'
+  [2] REMEDIATION | backup_service | backup_3245 | BLOCK_RESTORE | BLOCKED | cite: ''
+  [3] VERIFICATION | account_service | account_4092 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [4] VERIFICATION | security_service | audit_record_1797 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [5] VERIFICATION | backup_service | backup_3245 | VERIFY_RESTORE_BLOCKED | BLOCKED | cite: ''
+==================================================
+CASE: case_18 | Email: mori.ren@gmail.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-09-06T11:00:00Z | Reported: 2026-09-09T11:00:00Z | Audit: 2026-09-26T11:00:00Z
+Request Text:
+  I am asking you to remove my account and the personal information linked to it. Please review any identifiers connected to this account as part of the request. Please let me know once the request has been reviewed.
+Steps (14):
+  [1] FINDING | search_service | search_4013 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_94'
+  [2] FINDING | analytics_platform | analytics_037 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_94'
+  [3] FINDING | support_platform | support_5569 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_94'
+  [4] FINDING | integration_service | data_flow_4890 | REPORT_ACTIVE_DATA_FLOW | ACTIVE | cite: 'evidence_94'
+  [5] REMEDIATION | integration_service | data_flow_4890 | DISABLE_DATA_FLOW | DISABLED | cite: ''
+  [6] REMEDIATION | search_service | search_4013 | DELETE_RECORD | ABSENT | cite: ''
+  [7] REMEDIATION | support_platform | support_5569 | REDACT_RECORD | REDACTED | cite: ''
+  [8] REMEDIATION | analytics_platform | analytics_037 | ANONYMIZE_RECORD | ANONYMIZED | cite: ''
+  [9] VERIFICATION | account_service | account_5521 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [10] VERIFICATION | search_service | search_4013 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [11] VERIFICATION | security_service | audit_record_6645 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [12] VERIFICATION | support_platform | support_5569 | VERIFY_RECORD_REDACTED | REDACTED | cite: ''
+  [13] VERIFICATION | analytics_platform | analytics_037 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: ''
+  [14] VERIFICATION | integration_service | data_flow_4890 | VERIFY_DATA_FLOW_DISABLED | DISABLED | cite: ''
+==================================================
+CASE: case_19 | Email: e.varga90@yahoo.com | Status: INCOMPLETE (Reported: PARTIALLY_COMPLETE)
+Requested: 2026-08-17T12:00:00Z | Reported: 2026-08-19T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  Please remove my profile and clean my personal details out of earlier support conversations. Some of those messages also relate to another customer, so the conversation itself may need to stay.
+Steps (8):
+  [1] FINDING | search_service | search_6083 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_01'
+  [2] FINDING | support_platform | support_9553 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_01'
+  [3] REMEDIATION | search_service | search_6083 | DELETE_RECORD | ABSENT | cite: ''
+  [4] REMEDIATION | support_platform | support_9553 | REDACT_RECORD | REDACTED | cite: ''
+  [5] VERIFICATION | account_service | account_9102 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [6] VERIFICATION | search_service | search_6083 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [7] VERIFICATION | security_service | audit_record_6793 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [8] VERIFICATION | support_platform | support_9553 | VERIFY_RECORD_REDACTED | REDACTED | cite: ''
+==================================================
+CASE: case_20 | Email: akosua.gyasi@gmail.com | Status: INCOMPLETE (Reported: NOT_STARTED)
+Requested: 2026-09-08T11:00:00Z | Reported: 2026-09-09T11:00:00Z | Audit: 2026-09-26T11:00:00Z
+Request Text:
+  Please treat this message as a request for permanent account deletion. Please check the records connected to the account before confirming completion. Please send a confirmation after the process finishes.
+Steps (8):
+  [1] FINDING | search_service | search_4262 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_94'
+  [2] FINDING | integration_service | data_flow_1770 | REPORT_ACTIVE_DATA_FLOW | ACTIVE | cite: 'evidence_94'
+  [3] REMEDIATION | integration_service | data_flow_1770 | DISABLE_DATA_FLOW | DISABLED | cite: ''
+  [4] REMEDIATION | search_service | search_4262 | DELETE_RECORD | ABSENT | cite: ''
+  [5] VERIFICATION | account_service | account_5037 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [6] VERIFICATION | search_service | search_4262 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [7] VERIFICATION | security_service | audit_record_5569 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [8] VERIFICATION | integration_service | data_flow_1770 | VERIFY_DATA_FLOW_DISABLED | DISABLED | cite: ''
+==================================================
+CASE: case_21 | Email: amara-okeke@proton.me | Status: COMPLETE (Reported: COMPLETE)
+Requested: 2026-09-04T12:00:00Z | Reported: 2026-09-05T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  I deleted my account and received the confirmation email. Could you verify that the profile is gone and that anything retained for security is limited to what is required?
+Steps (3):
+  [1] VERIFICATION | account_service | account_6440 | VERIFY_RECORD_ABSENT | ABSENT | cite: 'evidence_92'
+  [2] VERIFICATION | security_service | audit_record_3737 | VERIFY_RECORD_PRESENT | PRESENT | cite: 'evidence_92'
+  [3] VERIFICATION | analytics_platform | analytics_5335 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: 'evidence_92'
+==================================================
+CASE: case_22 | Email: seoyeon-han@gmail.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-08-31T10:00:00Z | Reported: 2026-09-01T10:00:00Z | Audit: 2026-09-21T10:00:00Z
+Request Text:
+  Please erase the account linked to this email address. Please apply the correct treatment to records covered by the request. Please send a confirmation after the process finishes.
+Steps (8):
+  [1] FINDING | search_service | search_8911 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_05'
+  [2] FINDING | analytics_platform | analytics_4440 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_05'
+  [3] REMEDIATION | search_service | search_8911 | DELETE_RECORD | ABSENT | cite: ''
+  [4] REMEDIATION | analytics_platform | analytics_4440 | ANONYMIZE_RECORD | ANONYMIZED | cite: ''
+  [5] VERIFICATION | account_service | account_4990 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [6] VERIFICATION | search_service | search_8911 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [7] VERIFICATION | security_service | audit_record_3482 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [8] VERIFICATION | analytics_platform | analytics_4440 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: ''
+==================================================
+CASE: case_23 | Email: thandiwe.m6866@zoho.com | Status: INCOMPLETE (Reported: NOT_STARTED)
+Requested: 2026-09-02T12:00:00Z | Reported: 2026-09-05T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  Please delete this account, including the downloadable archive I requested earlier and any search result that still points to me. Security records can stay if policy requires them.
+Steps (8):
+  [1] FINDING | export_service | export_7364 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_92'
+  [2] FINDING | search_service | search_898 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_92'
+  [3] REMEDIATION | export_service | export_7364 | DELETE_RECORD | ABSENT | cite: ''
+  [4] REMEDIATION | search_service | search_898 | DELETE_RECORD | ABSENT | cite: ''
+  [5] VERIFICATION | account_service | account_410 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [6] VERIFICATION | export_service | export_7364 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [7] VERIFICATION | search_service | search_898 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [8] VERIFICATION | security_service | audit_record_4128 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+==================================================
+CASE: case_24 | Email: keiko.nakamura@gmail.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-09-01T12:00:00Z | Reported: 2026-09-02T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  I was told that deletion was complete, but the account and its search result can still be found. Please investigate and finish the deletion.
+Steps (7):
+  [1] FINDING | account_service | account_5334 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_92'
+  [2] FINDING | search_service | search_5577 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_92'
+  [3] REMEDIATION | account_service | account_5334 | DELETE_RECORD | ABSENT | cite: ''
+  [4] REMEDIATION | search_service | search_5577 | DELETE_RECORD | ABSENT | cite: ''
+  [5] VERIFICATION | account_service | account_5334 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [6] VERIFICATION | search_service | search_5577 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [7] VERIFICATION | security_service | audit_record_7095 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+==================================================
+CASE: case_25 | Email: s.yoon04@gmail.com | Status: COMPLETE (Reported: NOT_STARTED)
+Requested: 2026-08-31T12:00:00Z | Reported: 2026-09-02T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  The privacy page still says my request failed. Please inspect the actual systems and tell me whether the account and identifiable analytics data have already been removed.
+Steps (3):
+  [1] VERIFICATION | account_service | account_3136 | VERIFY_RECORD_ABSENT | ABSENT | cite: 'evidence_92'
+  [2] VERIFICATION | security_service | audit_record_451 | VERIFY_RECORD_PRESENT | PRESENT | cite: 'evidence_92'
+  [3] VERIFICATION | analytics_platform | analytics_1895 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: 'evidence_92'
+==================================================
+CASE: case_26 | Email: almeida.mariana@gmail.com | Status: COMPLETE (Reported: NOT_STARTED)
+Requested: 2026-08-30T12:00:00Z | Reported: 2026-09-02T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  I found an old report saying my account still existed. Please check the latest state and confirm that the profile is gone and that remaining records cannot identify me.
+Steps (6):
+  [1] VERIFICATION | account_service | account_5684 | VERIFY_RECORD_ABSENT | ABSENT | cite: 'evidence_92'
+  [2] VERIFICATION | security_service | audit_record_5416 | VERIFY_RECORD_PRESENT | PRESENT | cite: 'evidence_92'
+  [3] VERIFICATION | support_platform | support_4715 | VERIFY_RECORD_REDACTED | REDACTED | cite: 'evidence_92'
+  [4] VERIFICATION | analytics_platform | analytics_4566 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: 'evidence_92'
+  [5] VERIFICATION | integration_service | data_flow_6244 | VERIFY_DATA_FLOW_DISABLED | DISABLED | cite: 'evidence_92'
+  [6] VERIFICATION | backup_service | backup_3120 | VERIFY_RESTORE_BLOCKED | BLOCKED | cite: 'evidence_92'
+==================================================
+CASE: case_27 | Email: ananya-nair@gmail.com | Status: COMPLETE (Reported: COMPLETE)
+Requested: 2026-08-29T12:00:00Z | Reported: 2026-08-30T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  Please audit the deletion as it stood when my request was reviewed. I want confirmation that the account was fully removed at that point.
+Steps (6):
+  [1] VERIFICATION | account_service | account_3866 | VERIFY_RECORD_ABSENT | ABSENT | cite: 'evidence_92'
+  [2] VERIFICATION | security_service | audit_record_3830 | VERIFY_RECORD_PRESENT | PRESENT | cite: 'evidence_92'
+  [3] VERIFICATION | support_platform | support_4707 | VERIFY_RECORD_REDACTED | REDACTED | cite: 'evidence_92'
+  [4] VERIFICATION | analytics_platform | analytics_4574 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: 'evidence_92'
+  [5] VERIFICATION | integration_service | data_flow_2295 | VERIFY_DATA_FLOW_DISABLED | DISABLED | cite: 'evidence_92'
+  [6] VERIFICATION | backup_service | backup_5970 | VERIFY_RESTORE_BLOCKED | BLOCKED | cite: 'evidence_92'
+==================================================
+CASE: case_28 | Email: smartinez6461@gmail.com | Status: COMPLETE (Reported: NOT_STARTED)
+Requested: 2026-08-28T12:00:00Z | Reported: 2026-08-30T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  Can you verify that my account was deleted? A search result with a similar email belongs to someone else, so please do not treat that record as mine.
+Steps (6):
+  [1] VERIFICATION | account_service | account_5482 | VERIFY_RECORD_ABSENT | ABSENT | cite: 'evidence_92'
+  [2] VERIFICATION | security_service | audit_record_9265 | VERIFY_RECORD_PRESENT | PRESENT | cite: 'evidence_92'
+  [3] VERIFICATION | support_platform | support_2351 | VERIFY_RECORD_REDACTED | REDACTED | cite: 'evidence_92'
+  [4] VERIFICATION | analytics_platform | analytics_6077 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: 'evidence_92'
+  [5] VERIFICATION | integration_service | data_flow_2337 | VERIFY_DATA_FLOW_DISABLED | DISABLED | cite: 'evidence_92'
+  [6] VERIFICATION | backup_service | backup_838 | VERIFY_RESTORE_BLOCKED | BLOCKED | cite: 'evidence_92'
+==================================================
+CASE: case_29 | Email: noah.f438085@outlook.com | Status: INCOMPLETE (Reported: NOT_STARTED)
+Requested: 2026-08-27T12:00:00Z | Reported: 2026-08-30T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  I used a different email on this account before changing it. Please remove records under both addresses and switch off any integration that could copy them back into search or analytics.
+Steps (14):
+  [1] FINDING | search_service | search_1993 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_92'
+  [2] FINDING | analytics_platform | analytics_5208 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_92'
+  [3] FINDING | support_platform | support_5281 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_92'
+  [4] FINDING | integration_service | data_flow_3827 | REPORT_ACTIVE_DATA_FLOW | ACTIVE | cite: 'evidence_92'
+  [5] REMEDIATION | integration_service | data_flow_3827 | DISABLE_DATA_FLOW | DISABLED | cite: ''
+  [6] REMEDIATION | search_service | search_1993 | DELETE_RECORD | ABSENT | cite: ''
+  [7] REMEDIATION | support_platform | support_5281 | REDACT_RECORD | REDACTED | cite: ''
+  [8] REMEDIATION | analytics_platform | analytics_5208 | ANONYMIZE_RECORD | ANONYMIZED | cite: ''
+  [9] VERIFICATION | account_service | account_7012 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [10] VERIFICATION | search_service | search_1993 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [11] VERIFICATION | security_service | audit_record_3954 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [12] VERIFICATION | support_platform | support_5281 | VERIFY_RECORD_REDACTED | REDACTED | cite: ''
+  [13] VERIFICATION | analytics_platform | analytics_5208 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: ''
+  [14] VERIFICATION | integration_service | data_flow_3827 | VERIFY_DATA_FLOW_DISABLED | DISABLED | cite: ''
+==================================================
+CASE: case_30 | Email: camille.bernard86@outlook.com | Status: INCOMPLETE (Reported: COMPLETE)
+Requested: 2026-08-26T12:00:00Z | Reported: 2026-08-27T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  I was told the account had been deleted, but I can still find traces in search, support, and analytics. Please handle them and disable any synchronization that could recreate them.
+Steps (14):
+  [1] FINDING | search_service | search_9359 | REPORT_REMAINING_RECORD | PRESENT | cite: 'evidence_92'
+  [2] FINDING | analytics_platform | analytics_3697 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_92'
+  [3] FINDING | support_platform | support_6477 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_92'
+  [4] FINDING | integration_service | data_flow_8524 | REPORT_ACTIVE_DATA_FLOW | ACTIVE | cite: 'evidence_92'
+  [5] REMEDIATION | integration_service | data_flow_8524 | DISABLE_DATA_FLOW | DISABLED | cite: ''
+  [6] REMEDIATION | search_service | search_9359 | DELETE_RECORD | ABSENT | cite: ''
+  [7] REMEDIATION | support_platform | support_6477 | REDACT_RECORD | REDACTED | cite: ''
+  [8] REMEDIATION | analytics_platform | analytics_3697 | ANONYMIZE_RECORD | ANONYMIZED | cite: ''
+  [9] VERIFICATION | account_service | account_4163 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [10] VERIFICATION | search_service | search_9359 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [11] VERIFICATION | security_service | audit_record_1707 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [12] VERIFICATION | support_platform | support_6477 | VERIFY_RECORD_REDACTED | REDACTED | cite: ''
+  [13] VERIFICATION | analytics_platform | analytics_3697 | VERIFY_RECORD_ANONYMIZED | ANONYMIZED | cite: ''
+  [14] VERIFICATION | integration_service | data_flow_8524 | VERIFY_DATA_FLOW_DISABLED | DISABLED | cite: ''
+==================================================
+CASE: case_31 | Email: a.eze08@gmail.com | Status: COMPLETE (Reported: COMPLETE)
+Requested: 2026-09-04T12:00:00Z | Reported: 2026-09-06T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  I no longer need this account. Please remove my name and contact details, but keeping an internal deleted-account reference is fine if other required records still depend on it.
+Steps (3):
+  [1] VERIFICATION | account_service | account_4857 | VERIFY_RECORD_ABSENT | ABSENT | cite: 'evidence_51'
+  [2] VERIFICATION | security_service | audit_record_6909 | VERIFY_RECORD_PRESENT | PRESENT | cite: 'evidence_51'
+  [3] VERIFICATION | identity_service | tombstone_440 | VERIFY_RECORD_REDACTED | REDACTED | cite: 'evidence_51'
+==================================================
+CASE: case_32 | Email: addo.kofi@gmail.com | Status: INCOMPLETE (Reported: PARTIALLY_COMPLETE)
+Requested: 2026-09-03T12:00:00Z | Reported: 2026-09-06T12:00:00Z | Audit: 2026-09-15T12:00:00Z
+Request Text:
+  The account itself is gone, but an internal deleted-account record still shows my personal details. Please keep only the reference needed for retained records and remove the rest.
+Steps (5):
+  [1] FINDING | identity_service | tombstone_9178 | REPORT_EXPOSED_PII | PRESENT | cite: 'evidence_51'
+  [2] REMEDIATION | identity_service | tombstone_9178 | REDACT_RECORD | REDACTED | cite: ''
+  [3] VERIFICATION | account_service | account_8858 | VERIFY_RECORD_ABSENT | ABSENT | cite: ''
+  [4] VERIFICATION | security_service | audit_record_7068 | VERIFY_RECORD_PRESENT | PRESENT | cite: ''
+  [5] VERIFICATION | identity_service | tombstone_9178 | VERIFY_RECORD_REDACTED | REDACTED | cite: ''
