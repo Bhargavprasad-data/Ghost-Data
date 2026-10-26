@@ -4,7 +4,7 @@
 *An enterprise-grade digital forensics engine and interactive forensics dashboard for auditing deletion workflows, detecting ghost records, and producing verifiable remediation plans.*
 
 ---
-
+ 
 ## 1. Executive Summary 
 
 Deletion workflows frequently report **Complete** while personal data persists in secondary replicas, logs, customer support tickets, exports, search indexes, or backups. Moreover, active synchronization and restore pipelines can recreate data that was deleted from its original primary store.
