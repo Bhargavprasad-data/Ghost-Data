@@ -1,7 +1,7 @@
 # Ghost Data Still Exists — Autonomous Deletion-Audit Agent
 
 **HackerRank Orchestrate (October 2026)**  
-*An enterprise-grade digital forensics engine and interactive forensics dashboard for auditing deletion workflows, detecting ghost records, and producing verifiable remediation plans.*
+*An enterprise-grade digital forensics engine and interactive forensics dashboard for auditing deletion workflows, detecting ghost records, and producing verifiable remediation plans.* 
 
 ---
  
